@@ -5,7 +5,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Copie le fichier JAR de l'application Spring Boot dans le conteneur
-COPY target/*.jar app.jar
+COPY multiplication-0.0.1-SNAPSHOT.jar app.jar
 
 # Commande à exécuter lorsque le conteneur démarre
 CMD ["java", "-jar", "app.jar"]
