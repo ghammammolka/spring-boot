@@ -12,8 +12,5 @@ steps:
     args: ['cp', 'gs://appspring/multiplication-0.0.1-SNAPSHOT.jar', '/home/molkaghammam2']
 
   # Déploiement de l'application Java sur Cloud Run
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['run', 'deploy', 'multiplication', '--image=us-docker.pkg.dev/internship-415612/multiplication/multiplication', '--region=us-central1']
-    env:
-      - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
-      - 'CLOUDSDK_CONTAINER_IMAGE=us-docker.pkg.dev/internship-415612/multiplication/multiplication'
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['run', '-d', '-p', '8081:8081', '-v', '/home/molkaghammam2/multiplication-0.0.1-SNAPSHOT.jar:/apps/multiplication-0.0.1-SNAPSHOT.jar', 'openjdk:11', 'java', '-jar', '/apps/multiplication-0.0.1-SNAPSHOT.jar']
