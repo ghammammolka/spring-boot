@@ -1,16 +1,19 @@
 steps:
-  # Étape pour construire l'application Spring Boot
+  # Compilation de l'application Spring Boot avec Maven
   - name: 'gcr.io/cloud-builders/mvn'
     args: ['package']
 
-  # Étape pour construire l'image Docker de l'application
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/multiplication', '.']
+  # Copie du fichier JAR compilé vers Google Cloud Storage (GCS)
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', './multiplication-0.0.1-SNAPSHOT.jar', 'gs://appspring/']
 
-  # Étape pour pousser l'image Docker vers Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/multiplication']
+  # Téléchargement du fichier JAR depuis Google Cloud Storage
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', 'gs://appspring/multiplication-0.0.1-SNAPSHOT.jar', '/home/molkaghammam2']
 
-  # Étape pour déployer l'image Docker sur Cloud Run
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['run', 'deploy', 'multiplication', '--image=gcr.io/$PROJECT_ID/multiplication', '--region=us-central1']
+ # Déploiement de l'application Java sur Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 'multiplication', '--image=us-docker.pkg.dev/internship-415612/multiplication/multiplication', '--region=us-central1']
+  env:
+    - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
+    - 'CLOUDSDK_CONTAINER_IMAGE=us-docker.pkg.dev/internship-415612/multiplication/multiplication'
