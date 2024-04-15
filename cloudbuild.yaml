@@ -11,17 +11,16 @@ steps:
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', 'gs://appspring/multiplication-0.0.1-SNAPSHOT.jar', '/home/molkaghammam2']
 
- # Déploiement de l'application Spring Boot sur un serveur autonome
-- name: 'gcr.io/cloud-builders/docker'
-  args:
-    - 'run'
-    - '-d'
-    - '-p'
-    - '8081:8081'
-    - '-v'
-    - '/home/molkaghammam2/multiplication-0.0.1-SNAPSHOT.jar:/app/multiplication-0.0.1-SNAPSHOT.jar'
-    - 'openjdk:11'
-    - 'java'
-    - '-jar'
-    - '/app/multiplication-0.0.1-SNAPSHOT.jar'
-
+  # Déploiement de l'application Spring Boot sur un serveur autonome avec Docker
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'run'
+      - '-d'
+      - '-p'
+      - '8081:8081'
+      - '-v'
+      - '/home/molkaghammam2/multiplication-0.0.1-SNAPSHOT.jar:/app/multiplication-0.0.1-SNAPSHOT.jar'
+      - 'openjdk:11'
+      - 'java'
+      - '-jar'
+      - '/app/multiplication-0.0.1-SNAPSHOT.jar'
