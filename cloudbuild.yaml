@@ -7,11 +7,10 @@ steps:
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', './multiplication-0.0.1-SNAPSHOT.jar', 'gs://appspring/']
 
-  # Téléchargement du fichier JAR depuis Google Cloud Storage vers la machine virtuelle
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['compute', 'scp', '--zone=us-central1-a', 'gs://appspring/multiplication-0.0.1-SNAPSHOT.jar', 'instance-20240227-124824:/home/molkaghammam2']
+  # Téléchargement du fichier JAR depuis Google Cloud Storage
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', 'gs://appspring/multiplication-0.0.1-SNAPSHOT.jar', '/home/molkaghammam2']
 
-  # Exécution de l'application sur la machine virtuelle à partir du fichier JAR
+  # Déploiement de l'application sur la machine virtuelle
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['compute', 'ssh', 'instance-20240227-124824', '--command', 'java -jar /home/molkaghammam2/multiplication-0.0.1-SNAPSHOT.jar']
-
+    args: ['compute', 'ssh', 'instance-20240227-124824', '--command', 'java -jar /home/molkaghammam2/multiplication-0.0.1-SNAPSHOT.jar']  
