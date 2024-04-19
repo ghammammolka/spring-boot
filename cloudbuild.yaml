@@ -11,14 +11,9 @@ steps:
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', 'gs://appspring/multiplication-0.0.1-SNAPSHOT.jar', '/home/molkaghammam2']
 
+  # Déploiement de l'application sur Google App Engine
   - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'gcloud'
-    args:
-      - 'compute'
-      - 'ssh'
-      - 'instance-20240227-124824'
-      - '--zone=us-central1-a'
-      - '--command'
-      - 'java -jar /home/molkaghammam2/multiplication-0.0.1-SNAPSHOT.jar'
+    args: ['app', 'deploy']
+    
 
 
