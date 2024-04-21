@@ -16,7 +16,7 @@ steps:
     args:
       - 'compute'
       - 'ssh'
-      - 'instance-20240227-124824'
+      - 'molkaghammam2@instance-20240227-124824'
       - '--zone=us-central1-a'
       - '--command'
       - 'java -jar /home/molkaghammam2/multiplication-0.0.1-SNAPSHOT.jar'    
