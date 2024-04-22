@@ -9,7 +9,7 @@ steps:
 
   # Téléchargement du fichier JAR depuis Google Cloud Storage
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['cp', 'gs://appspring/multiplication-0.0.1-SNAPSHOT.jar', '/home/molkaghammam2']
+    args: ['cp', 'gs://appspring/multiplication-0.0.1-SNAPSHOT.jar', '/home/molkaghammam2/springapp']
 
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'gcloud'
